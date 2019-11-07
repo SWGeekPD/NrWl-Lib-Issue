@@ -1,0 +1,140 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "coe-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/coe-demo",
+      "sourceRoot": "apps/coe-demo/src",
+      "prefix": "coe-demo",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/coe-demo",
+            "index": "apps/coe-demo/src/index.html",
+            "main": "apps/coe-demo/src/main.ts",
+            "polyfills": "apps/coe-demo/src/polyfills.ts",
+            "tsConfig": "apps/coe-demo/tsconfig.app.json",
+            "assets": [
+              "apps/coe-demo/src/favicon.ico",
+              "apps/coe-demo/src/assets"
+            ],
+            "styles": ["apps/coe-demo/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/coe-demo/src/environments/environment.ts",
+                  "with": "apps/coe-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "coe-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "coe-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "coe-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/coe-demo/tsconfig.app.json",
+              "apps/coe-demo/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/coe-demo/jest.config.js",
+            "tsConfig": "apps/coe-demo/tsconfig.spec.json",
+            "setupFile": "apps/coe-demo/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "coe-demo-e2e": {
+      "root": "apps/coe-demo-e2e",
+      "sourceRoot": "apps/coe-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/coe-demo-e2e/cypress.json",
+            "tsConfig": "apps/coe-demo-e2e/tsconfig.e2e.json",
+            "devServerTarget": "coe-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "coe-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/coe-demo-e2e/tsconfig.e2e.json"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "coe-demo"
+}
