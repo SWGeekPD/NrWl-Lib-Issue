@@ -15,7 +15,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@coe-demo/mylib": ["libs/mylib/src/index.ts"],
+      "@coe-demo/mylib1": ["libs/mylib1/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

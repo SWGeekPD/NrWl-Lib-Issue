@@ -118,6 +118,68 @@
           }
         }
       }
+    },
+    "mylib": {
+      "projectType": "library",
+      "root": "libs/mylib",
+      "sourceRoot": "libs/mylib/src",
+      "prefix": "coe-demo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mylib/tsconfig.lib.json",
+              "libs/mylib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mylib/jest.config.js",
+            "tsConfig": "libs/mylib/tsconfig.spec.json",
+            "setupFile": "libs/mylib/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "mylib1": {
+      "projectType": "library",
+      "root": "libs/mylib1",
+      "sourceRoot": "libs/mylib1/src",
+      "prefix": "coe-demo",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/mylib1/tsconfig.lib.json",
+              "libs/mylib1/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/mylib1/jest.config.js",
+            "tsConfig": "libs/mylib1/tsconfig.spec.json",
+            "setupFile": "libs/mylib1/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
